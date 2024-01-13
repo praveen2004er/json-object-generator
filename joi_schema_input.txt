@@ -1,0 +1,29 @@
+const addressSchema = Joi.object({
+ street: Joi.string().required(),
+ city: Joi.string().required(),
+ zipCode: Joi.string().pattern(/^\d{5}$/),
+});
+
+const personSchema = Joi.object({
+ firstName: Joi.string().required(),
+ lastName: Joi.string().required(),
+ age: Joi.number().integer().min(18).max(99),
+ email: Joi.string().email(),
+ address: addressSchema,
+ phone: Joi.string().pattern(/^\d{10}$/),
+ isAdmin: Joi.boolean(),
+ hobbies: Joi.array().items(Joi.string()),
+ isActive: Joi.boolean().default(true),
+ createdAt: Joi.date().default(() => new Date(), 'current date'),
+});
+
+const nestedSchema = Joi.object({
+ title: Joi.string().required(),
+ description: Joi.string(),
+ author: personSchema,
+ contributors: Joi.array().items(personSchema),
+ publishedDate: Joi.date(),
+ tags: Joi.array().items(Joi.string()),
+ isPublished: Joi.boolean().default(false),
+ rating: Joi.number().min(0).max(5),
+});
