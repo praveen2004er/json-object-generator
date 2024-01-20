@@ -139,7 +139,7 @@ def generate_dict_testcase_description_to_json(api_key, joi_object_schema_string
 
 
 def main():
-    api_key = extract_json(read_file_as_string('../config.json'))['api_key']
+    api_key = extract_json(read_file_as_string('config.json'))['api_key']
     joi_object_schema_string = read_file_as_string('joi_schema_input.txt')
 
     description_to_json_dict = generate_dict_testcase_description_to_json(api_key, joi_object_schema_string, 1)
